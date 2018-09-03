@@ -23,9 +23,9 @@
     <Transaction>2018/06/13 11:15:25.000.550,C:\Projects\iFinance\Loan\Backlog.dfm=C:\Projects\iFinance\Loan\Unit1.dfm</Transaction>
     <Transaction>2018/07/19 20:21:19.000.608,=C:\Projects\iFinance\Loan\Unit1.pas</Transaction>
     <Transaction>2018/07/19 20:48:29.000.512,C:\Projects\iFinance\Loan\LoanUtils.pas=C:\Projects\iFinance\Loan\Unit1.pas</Transaction>
-    <Transaction>2018/08/26 14:15:56.346,=C:\Projects\iFinance\Loan\Unit1.pas</Transaction>
-    <Transaction>2018/08/26 14:17:14.077,C:\Projects\iFinance\Loan\Reloan.pas=C:\Projects\iFinance\Loan\Unit1.pas</Transaction>
-    <Transaction>2018/08/26 14:17:14.077,C:\Projects\iFinance\Loan\Reloan.dfm=C:\Projects\iFinance\Loan\Unit1.dfm</Transaction>
+    <Transaction>2018/08/26 14:15:56.000.346,=C:\Projects\iFinance\Loan\Unit1.pas</Transaction>
+    <Transaction>2018/08/26 14:17:14.000.077,C:\Projects\iFinance\Loan\Reloan.pas=C:\Projects\iFinance\Loan\Unit1.pas</Transaction>
+    <Transaction>2018/08/26 14:17:14.000.077,C:\Projects\iFinance\Loan\Reloan.dfm=C:\Projects\iFinance\Loan\Unit1.dfm</Transaction>
   </Transactions>
 	<ProjectSortOrder AutoSort="0" SortType="0">
     <File Path="..\..\iFinance"/>
@@ -113,10 +113,6 @@
     <File Path="adortl.dcp"/>
     <File Path="dbrtl.dcp"/>
     <File Path="FireDAC.dcp"/>
-    <File Path="Jcl.dcp"/>
-    <File Path="JvControls.dcp"/>
-    <File Path="JvCore.dcp"/>
-    <File Path="JvStdCtrls.dcp"/>
     <File Path="RaizeComponentsVcl.dcp"/>
     <File Path="RaizeComponentsVclDb.dcp"/>
     <File Path="rtl.dcp"/>

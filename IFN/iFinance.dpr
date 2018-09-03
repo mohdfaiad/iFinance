@@ -20,7 +20,7 @@ begin
         Application.Initialize;
         Application.MainFormOnTaskbar := True;
         Application.CreateForm(TfrmMain, frmMain);
-        Application.Run;
+  Application.Run;
       end;
     end
     else ShowErrorBox('Configuration file not found.');

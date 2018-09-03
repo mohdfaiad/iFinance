@@ -925,11 +925,11 @@ begin
     DecodeDate(LNextSchedule,yy,mm,dd);
 
     if cd <> dd then
-      if DaysBetween(LNextSchedule,FLastTransactionDate) < ifn.DaysInAMonth then
-        LNextSchedule := IncDay(LNextSchedule); //  IncDay(FLastTransactionDate,ifn.DaysInAMonth);
-    // else if (cd = 31) and (mm <> MonthFebruary) then
-    //  LNextSchedule := EncodeDate(yy,mm,30)
-    // else LNextSchedule := EncodeDate(yy,mm,cd);
+    begin
+      if (DaysBetween(LNextSchedule,FLastTransactionDate) < ifn.DaysInAMonth)
+        or (cd = 31) then
+        LNextSchedule := IncDay(LNextSchedule);
+    end;
   end;
 
   Result := LNextSchedule;

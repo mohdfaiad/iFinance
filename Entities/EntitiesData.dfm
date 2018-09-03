@@ -1,6 +1,6 @@
 object dmEntities: TdmEntities
   OldCreateOrder = False
-  Height = 447
+  Height = 336
   Width = 771
   object dstEntities: TADODataSet
     Connection = dmApplication.acMain
@@ -140,8 +140,8 @@ object dmEntities: TdmEntities
         Size = 9
         Value = Null
       end>
-    Left = 248
-    Top = 80
+    Left = 256
+    Top = 24
   end
   object dstIHPersonal: TADODataSet
     Tag = 4
@@ -166,13 +166,13 @@ object dmEntities: TdmEntities
         Size = 9
         Value = ''
       end>
-    Left = 248
-    Top = 136
+    Left = 256
+    Top = 80
   end
   object dscIHPersonal: TDataSource
     DataSet = dstIHPersonal
-    Left = 336
-    Top = 136
+    Left = 344
+    Top = 80
   end
   object dstIHContact: TADODataSet
     Tag = 4
@@ -196,13 +196,13 @@ object dmEntities: TdmEntities
         Size = 9
         Value = ''
       end>
-    Left = 248
-    Top = 192
+    Left = 256
+    Top = 136
   end
   object dscIHContact: TDataSource
     DataSet = dstIHContact
-    Left = 336
-    Top = 192
+    Left = 344
+    Top = 136
   end
   object dstGroups: TADODataSet
     Tag = 5
@@ -215,7 +215,37 @@ object dmEntities: TdmEntities
     OnNewRecord = dstGroupsNewRecord
     CommandText = 'sp_get_groups;1'
     CommandType = cmdStoredProc
+    FieldDefs = <
+      item
+        Name = 'loc_code'
+        Attributes = [faFixed]
+        DataType = ftFixedChar
+        Size = 3
+      end
+      item
+        Name = 'grp_id'
+        Attributes = [faFixed]
+        DataType = ftFixedChar
+        Size = 8
+      end
+      item
+        Name = 'grp_name'
+        DataType = ftString
+        Size = 30
+      end
+      item
+        Name = 'is_active'
+        Attributes = [faFixed]
+        DataType = ftWord
+      end
+      item
+        Name = 'par_grp_id'
+        Attributes = [faFixed]
+        DataType = ftFixedChar
+        Size = 8
+      end>
     Parameters = <>
+    StoreDefs = True
     Left = 72
     Top = 248
   end
@@ -228,17 +258,18 @@ object dmEntities: TdmEntities
     Tag = 5
     Connection = dmApplication.acMain
     CursorType = ctStatic
+    Filtered = True
     LockType = ltReadOnly
     CommandText = 'sp_get_groups;1'
     CommandType = cmdStoredProc
     Parameters = <>
-    Left = 72
-    Top = 304
+    Left = 432
+    Top = 136
   end
   object dscParGroup: TDataSource
     DataSet = dstParGroup
-    Left = 160
-    Top = 304
+    Left = 520
+    Top = 136
   end
   object dstEmployers: TADODataSet
     Tag = 6
@@ -253,13 +284,13 @@ object dmEntities: TdmEntities
     CommandText = 'sp_get_employers;1'
     CommandType = cmdStoredProc
     Parameters = <>
-    Left = 248
-    Top = 248
+    Left = 256
+    Top = 192
   end
   object dscEmployers: TDataSource
     DataSet = dstEmployers
-    Left = 336
-    Top = 248
+    Left = 344
+    Top = 192
   end
   object dstRecipient: TADODataSet
     Tag = 7
@@ -283,8 +314,8 @@ object dmEntities: TdmEntities
         Size = 9
         Value = Null
       end>
-    Left = 424
-    Top = 80
+    Left = 432
+    Top = 24
   end
   object dstRcpPersonal: TADODataSet
     Tag = 8
@@ -309,13 +340,13 @@ object dmEntities: TdmEntities
         Size = 9
         Value = ''
       end>
-    Left = 424
-    Top = 136
+    Left = 432
+    Top = 80
   end
   object dscRcpPersonal: TDataSource
     DataSet = dstRcpPersonal
-    Left = 512
-    Top = 136
+    Left = 520
+    Top = 80
   end
   object dstReferee: TADODataSet
     Tag = 9
@@ -339,8 +370,8 @@ object dmEntities: TdmEntities
         Size = 9
         Value = Null
       end>
-    Left = 592
-    Top = 80
+    Left = 600
+    Top = 24
   end
   object dstRefPersonal: TADODataSet
     Tag = 10
@@ -365,13 +396,13 @@ object dmEntities: TdmEntities
         Size = 9
         Value = ''
       end>
-    Left = 592
-    Top = 136
+    Left = 600
+    Top = 80
   end
   object dscRefPersonal: TDataSource
     DataSet = dstRefPersonal
-    Left = 680
-    Top = 136
+    Left = 688
+    Top = 80
   end
   object dstRefContact: TADODataSet
     Tag = 10
@@ -395,13 +426,13 @@ object dmEntities: TdmEntities
         Size = 9
         Value = ''
       end>
-    Left = 592
-    Top = 192
+    Left = 600
+    Top = 136
   end
   object dscRefContact: TDataSource
     DataSet = dstRefContact
-    Left = 680
-    Top = 192
+    Left = 688
+    Top = 136
   end
   object dstGroupAttribute: TADODataSet
     Tag = 5
@@ -414,12 +445,28 @@ object dmEntities: TdmEntities
     CommandText = 'sp_get_group_attributes;1'
     CommandType = cmdStoredProc
     Parameters = <>
-    Left = 72
-    Top = 368
+    Left = 256
+    Top = 248
   end
   object dscGroupAttribute: TDataSource
     DataSet = dstGroupAttribute
-    Left = 160
-    Top = 368
+    Left = 344
+    Top = 248
+  end
+  object dstBranches: TADODataSet
+    Connection = dmApplication.acCore
+    CursorType = ctStatic
+    LockType = ltReadOnly
+    AfterScroll = dstBranchesAfterScroll
+    CommandText = 'hris_dd_get_locations;1'
+    CommandType = cmdStoredProc
+    Parameters = <>
+    Left = 607
+    Top = 190
+  end
+  object dscBranches: TDataSource
+    DataSet = dstBranches
+    Left = 687
+    Top = 190
   end
 end

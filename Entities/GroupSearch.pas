@@ -24,9 +24,13 @@ type
     procedure tvGroupDblClick(Sender: TObject);
   private
     { Private declarations }
+    FLocation: string;
     procedure PopulateTree;
   protected
     { Public declarations }
+  public
+    constructor Create(AOwner: TComponent); overload; override;
+    constructor Create(AOwner: TComponent; const ALocation: string); reintroduce; overload;
   end;
 
 implementation
@@ -62,13 +66,15 @@ begin
 
     // loop through the list and insert items with no parent first
     for i := 0 to cnt do
-      if not groups[i].HasParent then
-        Items.AddObject(nil,groups[i].GroupName,groups[i]);
+      if groups[i].Location = FLocation then
+        if not groups[i].HasParent then
+          Items.AddObject(nil,groups[i].GroupName,groups[i]);
 
     // loop through the list and insert child items (with parent)
     for i := 0 to cnt do
-      if groups[i].HasParent then
-        Items.AddChildObject(GetParentNode,groups[i].GroupName,groups[i]);
+      if groups[i].Location = FLocation then
+        if groups[i].HasParent then
+          Items.AddChildObject(GetParentNode,groups[i].GroupName,groups[i]);
 
     FullExpand;
   end;
@@ -84,6 +90,17 @@ procedure TfrmGroupSearch.btnSelectClick(Sender: TObject);
 begin
   inherited;
   ModalResult := mrOk;
+end;
+
+constructor TfrmGroupSearch.Create(AOwner: TComponent);
+begin
+  inherited Create(AOwner);
+end;
+
+constructor TfrmGroupSearch.Create(AOwner: TComponent; const ALocation: string);
+begin
+  inherited Create(AOwner);
+  FLocation := ALocation;
 end;
 
 procedure TfrmGroupSearch.FormClose(Sender: TObject; var Action: TCloseAction);

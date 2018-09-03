@@ -35,6 +35,8 @@ type
     dscRefContact: TDataSource;
     dstGroupAttribute: TADODataSet;
     dscGroupAttribute: TDataSource;
+    dstBranches: TADODataSet;
+    dscBranches: TDataSource;
     procedure dstLandlordBeforeOpen(DataSet: TDataSet);
     procedure dstLandlordBeforePost(DataSet: TDataSet);
     procedure dstLlPersonalBeforeOpen(DataSet: TDataSet);
@@ -66,6 +68,7 @@ type
     procedure dstGroupAttributeBeforePost(DataSet: TDataSet);
     procedure dstGroupsAfterOpen(DataSet: TDataSet);
     procedure dstGroupAttributeNewRecord(DataSet: TDataSet);
+    procedure dstBranchesAfterScroll(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -94,6 +97,11 @@ procedure TdmEntities.dstLlContactBeforePost(DataSet: TDataSet);
 begin
   if DataSet.State = dsInsert then
     DataSet.FieldByName('entity_id').AsString := llord.Id;
+end;
+
+procedure TdmEntities.dstBranchesAfterScroll(DataSet: TDataSet);
+begin
+  dstParGroup.Filter := 'loc_code = ' + QuotedStr(DataSet.FieldByName('location_code').AsString);
 end;
 
 procedure TdmEntities.dstEmployersAfterOpen(DataSet: TDataSet);
@@ -191,7 +199,7 @@ begin
   with DataSet do
   begin
     FieldByName('is_active').AsInteger := 1;
-    FieldByName('loc_code').AsString := ifn.LocationCode;
+    // FieldByName('loc_code').AsString := ifn.LocationCode;
   end;
 end;
 

@@ -86,54 +86,61 @@ inherited frmGroupList: TfrmGroupList
     ExplicitHeight = 461
     object Label2: TLabel [0]
       Left = 13
-      Top = 23
+      Top = 51
       Width = 31
       Height = 14
       Caption = 'Name'
     end
     object Label3: TLabel [1]
       Left = 13
-      Top = 50
+      Top = 78
       Width = 36
       Height = 14
       Caption = 'Parent'
     end
     object Label4: TLabel [2]
       Left = 13
-      Top = 134
+      Top = 162
       Width = 79
       Height = 14
       Caption = 'Maximum total'
     end
     object Label5: TLabel [3]
       Left = 13
-      Top = 161
+      Top = 189
       Width = 55
       Height = 14
       Caption = 'Loan type'
     end
     object Label6: TLabel [4]
       Left = 13
-      Top = 188
+      Top = 216
       Width = 61
       Height = 14
       Caption = 'Concurrent'
     end
     object Label7: TLabel [5]
       Left = 13
-      Top = 215
+      Top = 243
       Width = 69
       Height = 14
       Caption = 'ID'#39's required'
     end
+    object Label8: TLabel [6]
+      Left = 13
+      Top = 23
+      Width = 36
+      Height = 14
+      Caption = 'Branch'
+    end
     inherited pnlAdd: TRzPanel
       Top = 431
-      TabOrder = 9
+      TabOrder = 10
       ExplicitTop = 431
     end
     object edGroupName: TRzDBEdit
       Left = 60
-      Top = 17
+      Top = 45
       Width = 204
       Height = 22
       DataSource = dmEntities.dscGroups
@@ -143,12 +150,12 @@ inherited frmGroupList: TfrmGroupList
       FrameVisible = True
       FramingPreference = fpCustomFraming
       TabOnEnter = True
-      TabOrder = 0
+      TabOrder = 1
     end
     object cbxPublic: TRzDBCheckBox
       Tag = 1
       Left = 112
-      Top = 236
+      Top = 264
       Width = 50
       Height = 16
       DataField = 'is_gov'
@@ -158,11 +165,11 @@ inherited frmGroupList: TfrmGroupList
       Caption = 'Public'
       FrameColor = 8675134
       TabOnEnter = True
-      TabOrder = 7
+      TabOrder = 9
     end
     object cbxActive: TRzDBCheckBox
       Left = 60
-      Top = 71
+      Top = 99
       Width = 53
       Height = 16
       DataField = 'is_active'
@@ -172,11 +179,11 @@ inherited frmGroupList: TfrmGroupList
       Caption = 'Active'
       FrameColor = 14272955
       TabOnEnter = True
-      TabOrder = 2
+      TabOrder = 3
     end
     object dbluParentGroup: TRzDBLookupComboBox
       Left = 60
-      Top = 44
+      Top = 72
       Width = 204
       Height = 22
       DataField = 'par_grp_id'
@@ -184,7 +191,7 @@ inherited frmGroupList: TfrmGroupList
       KeyField = 'grp_id'
       ListField = 'grp_name'
       ListSource = dmEntities.dscParGroup
-      TabOrder = 1
+      TabOrder = 2
       AllowNull = True
       FlatButtonColor = 8675134
       FlatButtons = True
@@ -197,7 +204,7 @@ inherited frmGroupList: TfrmGroupList
     object edMaxTotal: TRzDBNumericEdit
       Tag = 1
       Left = 112
-      Top = 128
+      Top = 156
       Width = 152
       Height = 22
       DataSource = dmEntities.dscGroupAttribute
@@ -208,13 +215,13 @@ inherited frmGroupList: TfrmGroupList
       FrameVisible = True
       FramingPreference = fpCustomFraming
       TabOnEnter = True
-      TabOrder = 3
+      TabOrder = 4
       DisplayFormat = '###,##0.00'
       FlatButtons = True
     end
     object RzGroupBox1: TRzGroupBox
       Left = 13
-      Top = 104
+      Top = 132
       Width = 251
       Height = 22
       Anchors = [akLeft, akTop, akRight]
@@ -242,7 +249,7 @@ inherited frmGroupList: TfrmGroupList
     object dbluLoanType: TRzDBLookupComboBox
       Tag = 1
       Left = 112
-      Top = 155
+      Top = 183
       Width = 152
       Height = 22
       DataField = 'loan_type'
@@ -250,7 +257,7 @@ inherited frmGroupList: TfrmGroupList
       KeyField = 'loan_type'
       ListField = 'loan_type_name'
       ListSource = dmAux.dscLoanType
-      TabOrder = 4
+      TabOrder = 5
       FlatButtons = True
       DisabledColor = 15327448
       FrameColor = 14272955
@@ -262,7 +269,7 @@ inherited frmGroupList: TfrmGroupList
     object edConcurrent: TRzDBEdit
       Tag = 1
       Left = 112
-      Top = 182
+      Top = 210
       Width = 49
       Height = 22
       DataSource = dmEntities.dscGroupAttribute
@@ -273,11 +280,11 @@ inherited frmGroupList: TfrmGroupList
       FrameVisible = True
       FramingPreference = fpCustomFraming
       TabOnEnter = True
-      TabOrder = 5
+      TabOrder = 6
     end
     object edIdentityDocs: TRzDBEdit
       Left = 112
-      Top = 209
+      Top = 237
       Width = 49
       Height = 22
       DataSource = dmEntities.dscGroupAttribute
@@ -288,7 +295,27 @@ inherited frmGroupList: TfrmGroupList
       FrameVisible = True
       FramingPreference = fpCustomFraming
       TabOnEnter = True
-      TabOrder = 6
+      TabOrder = 7
+    end
+    object dbluBranch: TRzDBLookupComboBox
+      Tag = 1
+      Left = 60
+      Top = 17
+      Width = 204
+      Height = 22
+      DataField = 'loc_code'
+      DataSource = dmEntities.dscGroups
+      KeyField = 'location_code'
+      ListField = 'location_name'
+      ListSource = dmEntities.dscBranches
+      TabOrder = 0
+      FlatButtons = True
+      DisabledColor = clWhite
+      FrameColor = 14272955
+      FrameHotColor = clBlack
+      FrameVisible = True
+      FramingPreference = fpCustomFraming
+      TabOnEnter = True
     end
   end
 end

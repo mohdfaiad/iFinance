@@ -28,6 +28,7 @@ begin
       gp.GroupName := FieldByName('grp_name').AsString;
       gp.ParentGroupId := FieldByName('par_grp_id').AsString;
       gp.IsActive := FieldByName('is_active').AsInteger;
+      gp.Location := FieldByName('loc_code').AsString;
 
       SetLength(groups,Length(groups) + 1);
       groups[Length(groups)-1] := gp;

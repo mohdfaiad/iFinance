@@ -17,9 +17,6 @@
     <File Path="BaseSearch.dfm"/>
     <File Path="adortl.dcp"/>
     <File Path="dbrtl.dcp"/>
-    <File Path="Jcl.dcp"/>
-    <File Path="JvCore.dcp"/>
-    <File Path="JvStdCtrls.dcp"/>
     <File Path="RaizeComponentsVcl.dcp"/>
     <File Path="RaizeComponentsVclDb.dcp"/>
     <File Path="rtl.dcp"/>

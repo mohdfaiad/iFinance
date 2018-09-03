@@ -104,7 +104,7 @@ end;
 procedure TfrmEmployerList.bteGroupButtonClick(Sender: TObject);
 begin
   inherited;
-  with TfrmGroupSearch.Create(self) do
+  with TfrmGroupSearch.Create(self,cmbBranch.Value) do
   begin
     try
       try

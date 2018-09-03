@@ -7,8 +7,8 @@ object dmApplication: TdmApplication
   object acMain: TADOConnection
     ConnectionString = 
       'Provider=SQLNCLI11.1;Integrated Security=SSPI;Persist Security I' +
-      'nfo=False;User ID="";Initial Catalog=iFinance;Data Source=BRYAN\' +
-      'DEVELOPMENT;Initial File Name="";Server SPN=""'
+      'nfo=False;User ID="";Initial Catalog=iFinance;Data Source=BRYAN-' +
+      'LENOVO\DEV;Initial File Name="";Server SPN=""'
     LoginPrompt = False
     Provider = 'SQLNCLI11.1'
     BeforeConnect = acMainBeforeConnect
@@ -62,8 +62,8 @@ object dmApplication: TdmApplication
   object acCore: TADOConnection
     ConnectionString = 
       'Provider=SQLNCLI11.1;Integrated Security=SSPI;Persist Security I' +
-      'nfo=False;User ID="";Initial Catalog=HRIS;Data Source=BRYAN\DEVE' +
-      'LOPMENT;Initial File Name="";Server SPN=""'
+      'nfo=False;User ID="";Initial Catalog=HRIS;Data Source=BRYAN-LENO' +
+      'VO\DEV;Initial File Name="";Server SPN=""'
     LoginPrompt = False
     Provider = 'SQLNCLI11.1'
     BeforeConnect = acCoreBeforeConnect

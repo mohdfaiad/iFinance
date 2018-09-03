@@ -26,6 +26,7 @@ type
     FIsGov: integer;
     FIsActive: integer;
     FAttributes: TGroupAttributes;
+    FLocation: string;
 
     function GetIsGov: boolean;
     function GetHasParent: boolean;
@@ -41,6 +42,7 @@ type
     property HasParent: boolean read GetHasParent;
     property IsActive: integer read FIsActive write FIsActive;
     property Attributes: TGroupAttributes read FAttributes write FAttributes;
+    property Location: string read FLocation write FLocation;
 
     procedure GetAttributes;
     class procedure AddAttributes;

@@ -29,6 +29,8 @@ type
     Label5: TLabel;
     Label6: TLabel;
     Label7: TLabel;
+    Label8: TLabel;
+    dbluBranch: TRzDBLookupComboBox;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure tvGroupChange(Sender: TObject; Node: TTreeNode);
@@ -37,6 +39,7 @@ type
       State: TDragState; var Accept: Boolean);
     procedure cmbBranchChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure sbtnNewClick(Sender: TObject);
   private
     { Private declarations }
     procedure PopulateTree;
@@ -278,7 +281,8 @@ function TfrmGroupList.EntryIsValid: boolean;
 var
   error: string;
 begin
-  if Trim(edGroupName.Text) = '' then  error := 'Please enter a group name.'
+  if Trim(dbluBranch.Text) = '' then  error := 'Please enter a group name.'
+  else if Trim(edGroupName.Text) = '' then  error := 'Please enter a group name.'
   else if Trim(edGroupName.Text) = (dbluParentGroup.Text) then
     error := 'Parent group cannot be the same as group.'
 
@@ -325,6 +329,12 @@ begin
       else CancelBatch;
     end;
   end;
+end;
+
+procedure TfrmGroupList.sbtnNewClick(Sender: TObject);
+begin
+  inherited;
+  grList.DataSource.DataSet.FieldByName('loc_code').AsString := cmbBranch.Value;
 end;
 
 end.

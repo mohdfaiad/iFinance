@@ -80,9 +80,6 @@ type
     procedure New;
   end;
 
-var
-  frmLoanClassificationList: TfrmLoanClassificationList;
-
 implementation
 
 {$R *.dfm}
@@ -144,6 +141,7 @@ begin
   bteGroup.Clear;
 
   // focus the first control
+  grList.DataSource.DataSet.FieldByName('loc_code').AsString := cmbBranch.Value;
   dbluBranch.SetFocus;
 end;
 
@@ -197,6 +195,10 @@ begin
     Filter := 'loc_code = ''' + dbluBranch.GetKeyValue + '''';
     Filtered := true;
     PopulateGroupList(dmAux.dstGroups);
+
+    // clear the group field
+    bteGroup.Clear;
+    grList.DataSource.DataSet.FieldByName('grp_id').Clear;
   end;
 end;
 
@@ -301,9 +303,15 @@ end;
 procedure TfrmLoanClassificationList.bteGroupButtonClick(Sender: TObject);
 begin
   inherited;
+  if dbluBranch.Text = '' then
+  begin
+    ShowErrorBox('Please select a branch.');
+    Exit;
+  end;
+
   dmEntities := TdmEntities.Create(self);
 
-  with TfrmGroupSearch.Create(self) do
+  with TfrmGroupSearch.Create(self,dbluBranch.KeyValue) do
   begin
     try
       try
