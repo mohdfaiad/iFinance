@@ -314,7 +314,7 @@ begin
           prcDeficit := detail.Loan.PrincipalDeficit - detail.Principal;
 
           if FDate > detail.Loan.NextPayment then
-            intDeficit := detail.Loan.InterestDeficit + (detail.Loan.InterestAdditional - detail.Interest)
+            intDeficit := detail.Loan.InterestDeficit + (detail.Loan.InterestDueOnPaymentDate - detail.Interest) // (detail.Loan.InterestAdditional - detail.Interest)
           else
             intDeficit := detail.Loan.InterestDeficit + (detail.Loan.InterestDueOnPaymentDate - detail.Interest);
 
