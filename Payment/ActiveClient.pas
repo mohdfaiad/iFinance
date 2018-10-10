@@ -31,6 +31,7 @@ type
     FPaymentsAdvance: integer;
     FAmortization: currency;
     FReleaseDate: TDateTime;
+    FRebate: currency;
 
     function GetIsDiminishing: boolean;
     function GetIsFixed: boolean;
@@ -87,6 +88,7 @@ type
     property PrincipalAmortisation: currency read FPrincipalAmortisation;
     property InterestDueOnPaymentDate: currency read GetInterestDueOnPaymentDate;
     property ReleaseDate: TDateTime read FReleaseDate write FReleaseDate;
+    property Rebate: currency read FRebate;
 
     procedure GetPaymentDue(const paymentDate: TDateTime);
     procedure RetrieveLedger;
@@ -251,7 +253,7 @@ end;
 
 procedure TLoan.GetInterestDue(const paymentDate: TDateTime);
 var
-  amort, additional, computed, full, tmp: currency;
+  amort, additional, computed, full, tmp, rbt: currency;
   LLedger, debitLedger: TLedger;
   days: integer;
   py, pm, pd, vy, vm, vd, ny, nm, nd: word;
@@ -262,6 +264,7 @@ begin
   full := 0;          // full payment
   amort := 0;         // amortisation for the month of payment date
   tmp := 0;           // stores the first amount in the Ledger.. used when no amortisation is found as of payment date
+  rbt := 0;           // rebate
 
   // will be used only for fixed accounts
   // or diminishing scheduled accounts
@@ -298,8 +301,7 @@ begin
   end;
 
   // payment is made before or after schedule date
-  if ((IsDiminishing) and (DiminishingType = dtFixed))
-    or (IsFixed) then
+  if ((IsDiminishing) and (DiminishingType = dtFixed)) then
   begin
     DecodeDate(NextPayment,ny,nm,nd);
 
@@ -367,8 +369,12 @@ begin
     debitLedger.Credit := 0;
     debitLedger.FullPayment := true;
 
-    days := DaysBetween(paymentDate,GetLatestInterestDate(paymentDate));
-    full := (FBalance * FInterestInDecimal * days) / ifn.DaysInAMonth;
+    if (IsFixed) and (FReleaseDate = FLastTransactionDate) then full := 0
+    else
+    begin
+      days := DaysBetween(paymentDate,GetLatestInterestDate(paymentDate));
+      full := (FBalance * FInterestInDecimal * days) / ifn.DaysInAMonth;
+    end;
 
     // round off to 2 decimal places
     full := RoundTo(full,-2);

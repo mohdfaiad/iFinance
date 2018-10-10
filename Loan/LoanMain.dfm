@@ -2087,19 +2087,19 @@ inherited frmLoanMain: TfrmLoanMain
               ParentFont = False
             end
             object lblDaysFromLastTransaction: TLabel
-              Left = 187
+              Left = 203
               Top = 186
               Width = 4
               Height = 14
             end
             object lblInterestDueAsOfDate: TLabel
-              Left = 147
+              Left = 163
               Top = 210
               Width = 4
               Height = 14
             end
             object lblTotalInterestDue: TLabel
-              Left = 139
+              Left = 155
               Top = 237
               Width = 4
               Height = 14

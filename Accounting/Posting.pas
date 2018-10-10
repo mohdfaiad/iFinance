@@ -39,13 +39,16 @@ type
     FReleaseAmount: currency;
     FDiminishingType: TDiminishingType;
     FAdvancePayments: integer;
+    FIsFixed: boolean;
 
     function GetNextScheduledPosting: TDateTime;
     function GetHasAdvancePayments: boolean;
+
   public
     property Id: string read FId write FId;
     property Balance: currency read FBalance write FBalance;
     property IsDiminishing: boolean read FIsDiminishing write FIsDiminishing;
+    property IsFixed: boolean read FIsFixed write FIsFixed;
     property InterestRate: currency read FInterestRate write FInterestRate;
     property DiminishingType: TDiminishingType read FDiminishingType write FDiminishingType;
     property ReleaseAmount: currency read FReleaseAmount write FReleaseAmount;
@@ -267,6 +270,7 @@ begin
           LLoan.InterestRate := FieldByName('int_rate').AsCurrency / 100;
           LLoan.ReleaseAmount := FieldByName('rel_amt').AsCurrency;
           LLoan.IsDiminishing := FieldByName('int_comp_method').AsString = 'D';
+          LLoan.IsFixed := FieldByName('int_comp_method').AsString = 'F';
           LLoan.DiminishingType := TDiminishingType(FieldByName('dim_type').AsInteger);
           LLoan.Balance := FieldByName('balance').AsCurrency;
           LLoan.LastTransactionDate := FieldByName('last_trans_date').AsDateTime;
@@ -287,23 +291,14 @@ begin
 
               interest := LLoan.Balance * LLoan.InterestRate
 
-              // if ad = nd then  interest := LLoan.Balance * LLoan.InterestRate
-              {else
-              begin
-                days := DaysBetween(ADate,LLoan.LastTransactionDate);
-
-                interest := (LLoan.Balance * LLoan.InterestRate) / ifn.DaysInAMonth;
-
-                // round off to 2 decimal places before multiplying agains DAYS
-                interest := RoundTo(interest,-2) * days;
-              end;  }
             end
             else interest := LLoan.ReleaseAmount *  LLoan.InterestRate;
 
             interest := RoundTo(interest,-2);
 
-            // for DIMINISHING SCHEDULED accounts.. use the first day of the month..
-            if (LLoan.IsDiminishing) and (LLoan.DiminishingType = dtScheduled) then
+            // for DIMINISHING SCHEDULED or FIXED accounts.. use the first day of the month..
+            if ((LLoan.IsDiminishing) and (LLoan.DiminishingType = dtScheduled))
+              or (LLoan.IsFixed) then
               primaryKey := PostInterest(interest,LLoan.Id,GetFirstDayOfValueDate(valueDate),interestSource,interestStatus)
             else primaryKey := PostInterest(interest,LLoan.Id,valueDate,interestSource,interestStatus);
 

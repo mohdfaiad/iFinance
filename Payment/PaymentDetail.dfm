@@ -54,8 +54,6 @@ inherited frmPaymentDetail: TfrmPaymentDetail
         ExplicitHeight = 233
         FixedDimension = 20
         inherited tsDetail: TRzTabSheet
-          ExplicitLeft = 1
-          ExplicitTop = -3
           ExplicitWidth = 756
           ExplicitHeight = 233
           object urlPrincipalAmortization: TRzURLLabel
@@ -345,7 +343,7 @@ inherited frmPaymentDetail: TfrmPaymentDetail
             Left = 322
             Top = 55
             Width = 30
-            Height = 17
+            Height = 14
             Caption = 'xxxxx'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -358,7 +356,7 @@ inherited frmPaymentDetail: TfrmPaymentDetail
             Left = 372
             Top = 105
             Width = 30
-            Height = 15
+            Height = 14
             Caption = 'xxxxx'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText

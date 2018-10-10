@@ -290,14 +290,14 @@ begin
   lblInterestDeficit.Caption := FormatCurr('###,###,##0.00;(###,###,##0.00);-', pmt.Client.ActiveLoans[i].InterestDeficit);
   urlAmortization.Caption := FormatCurr('###,###,##0.00', pmt.Client.ActiveLoans[i].Amortization);
 
-  if pmt.Details[pmt.DetailCount-1].IsFullPayment then
+  {if pmt.Details[pmt.DetailCount-1].IsFullPayment then
   begin
     if (pmt.Client.ActiveLoans[i].IsFixed) or ((pmt.Client.ActiveLoans[i].IsDiminishing) and (pmt.Client.ActiveLoans[i].DiminishingType = dtScheduled)) then
       urlInterestDueOnPaymentDate.Caption := FormatCurr('###,###,##0.00;-;', pmt.Client.ActiveLoans[i].FullPaymentInterest)
     else
       urlInterestDueOnPaymentDate.Caption := FormatCurr('###,###,##0.00;-;', pmt.Client.ActiveLoans[i].InterestDueOnPaymentDate);
   end
-  else
+  else}
     urlInterestDueOnPaymentDate.Caption := FormatCurr('###,###,##0.00;-;', pmt.Client.ActiveLoans[i].InterestDueOnPaymentDate);
 
   urlTotalInterestDue.Caption := FormatCurr('###,###,##0.00;-;-', pmt.Client.ActiveLoans[i].InterestTotalDue);

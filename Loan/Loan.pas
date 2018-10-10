@@ -470,6 +470,8 @@ begin
       FieldByName('last_trans_date').AsDateTime := GetLastTransactionDate;
 
       Post;
+
+      Requery;
     end;
   except
 
