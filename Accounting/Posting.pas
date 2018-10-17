@@ -40,6 +40,7 @@ type
     FDiminishingType: TDiminishingType;
     FAdvancePayments: integer;
     FIsFixed: boolean;
+    FReleaseDate: TDateTime;
 
     function GetNextScheduledPosting: TDateTime;
     function GetHasAdvancePayments: boolean;
@@ -56,6 +57,7 @@ type
     property NextScheduledPosting: TDateTime read GetNextScheduledPosting;
     property AdvancePayments: integer read FAdvancePayments write FAdvancePayments;
     property HasAdvancePayments: boolean read GetHasAdvancePayments;
+    property ReleaseDate: TDateTime read FReleaseDate write FReleaseDate;
   end;
 
   TPosting = class
@@ -275,6 +277,7 @@ begin
           LLoan.Balance := FieldByName('balance').AsCurrency;
           LLoan.LastTransactionDate := FieldByName('last_trans_date').AsDateTime;
           LLoan.AdvancePayments := FieldByName('payments_advance').AsInteger;
+          LLoan.ReleaseDate := FieldByName('date_rel').AsDateTime;
 
           if LLoan.NextScheduledPosting = ADate then
           begin
@@ -303,6 +306,17 @@ begin
             else primaryKey := PostInterest(interest,LLoan.Id,valueDate,interestSource,interestStatus);
 
             PostEntry(refPostingId, interest, credit, eventObject, primaryKey, status, postDate, valueDate, caseType);
+          end
+          else if LLoan.IsFixed then
+          begin
+            // for Fixed accounts.. post interest on the following day.. for first month interest only
+            if IncDay(LLoan.ReleaseDate) = ifn.AppDate then
+            begin
+              interest := LLoan.ReleaseAmount *  LLoan.InterestRate;
+              interest := RoundTo(interest,-2);
+              primaryKey := PostInterest(interest,LLoan.Id,IncDay(LLoan.ReleaseDate),interestSource,interestStatus);
+              PostEntry(refPostingId, interest, credit, eventObject, primaryKey, status, postDate, valueDate, caseType);
+            end;
           end;
 
           Next;
